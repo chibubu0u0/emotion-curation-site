@@ -138,3 +138,18 @@ http://localhost:3000/studio
 - 沒有 `package-lock.json`
 - Next / React 版本已固定，避免 Vercel 每次安裝到不同版本
 - `/studio` 在尚未設定 Sanity Project ID 前，會顯示設定提示，不會直接壞掉
+
+
+---
+
+## 2026-05-13 Sanity Structure 修正
+
+如果 `/studio` 顯示：
+
+```txt
+Encountered an error while reading structure
+`id` is required for lists
+```
+
+代表 Sanity 新版要求自訂 structure 裡的 list / listItem 都要有明確 `id`。
+本版本已修正 `sanity.structure.js`。
