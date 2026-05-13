@@ -1,0 +1,158 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #050505;
+  color: #f5f5f5;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 48px;
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(255,255,255,0.05), transparent 30%),
+    #050505;
+}
+
+.hero {
+  min-height: 72vh;
+  display: flex;
+  align-items: center;
+}
+
+.eyebrow {
+  letter-spacing: 0.2em;
+  font-size: 12px;
+  opacity: 0.55;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: clamp(56px, 10vw, 120px);
+  line-height: 0.95;
+  margin: 0;
+  font-weight: 600;
+}
+
+.description {
+  margin-top: 28px;
+  max-width: 520px;
+  font-size: 18px;
+  line-height: 1.7;
+  opacity: 0.75;
+}
+
+.primaryButton {
+  margin-top: 36px;
+  background: #f5f5f5;
+  color: #050505;
+  border: none;
+  padding: 16px 22px;
+  border-radius: 999px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+}
+
+.todayMood {
+  margin-top: 40px;
+}
+
+.moodCard {
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(20px);
+  padding: 32px;
+  border-radius: 28px;
+}
+
+.label {
+  opacity: 0.5;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+}
+
+.moodCard h2 {
+  margin-top: 18px;
+  font-size: 32px;
+}
+
+.moodCard p {
+  opacity: 0.7;
+  line-height: 1.7;
+}
+
+.objectsGrid {
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.objectCard {
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 28px;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.025);
+  transition: 0.3s ease;
+}
+
+.objectCard:hover {
+  transform: translateY(-6px);
+  background: rgba(255,255,255,0.04);
+}
+
+.objectCategory {
+  opacity: 0.5;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+}
+
+.objectCard h3 {
+  margin-top: 18px;
+  font-size: 28px;
+}
+
+.objectCard p {
+  margin-top: 12px;
+  opacity: 0.72;
+  line-height: 1.7;
+}
+
+.objectFooter {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0.55;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 24px;
+  }
+
+  .moodCard h2 {
+    font-size: 24px;
+  }
+}
