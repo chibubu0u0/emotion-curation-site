@@ -1,86 +1,114 @@
-'use client';
+import Link from "next/link";
+import { ArrowRight, SlidersHorizontal } from "lucide-react";
+import { getHomeData } from "@/lib/content";
+import { imageUrl } from "@/lib/image";
 
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+export default async function HomePage() {
+  const data = await getHomeData();
+  const hero = data.hero;
+  const mood = data.todayMood;
+  const objects = data.objects;
 
-const objects = [
-  {
-    title: 'Late Night Glass',
-    category: 'Rain Mood',
-    description: 'A transparent object for slow evenings and quiet playlists.',
-  },
-  {
-    title: 'Memory Cassette',
-    category: 'Nostalgia',
-    description: 'Feels like hearing an old song while riding the MRT home.',
-  },
-  {
-    title: 'Sunday Walkman',
-    category: 'Soft Escape',
-    description: 'A small device for disappearing into your own atmosphere.',
-  },
-];
-
-export default function Home() {
   return (
-    <main className="container">
+    <main className="siteShell">
+      <header className="topbar">
+        <Link href="/" className="brand">
+          {hero.siteName || "Liminal Objects"}
+        </Link>
+
+        <nav className="nav">
+          <a href="#objects">Objects</a>
+          <a href="#mood">Mood</a>
+          <Link href="/studio" className="adminLink">
+            <SlidersHorizontal size={15} />
+            後台
+          </Link>
+        </nav>
+      </header>
+
       <section className="hero">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <p className="eyebrow">EMOTIONAL CURATION ARCHIVE</p>
-
-          <h1>
-            Objects for
-            <br />
-            quiet people.
-          </h1>
-
-          <p className="description">
-            A curated emotional space between music, objects, memory and interface.
-          </p>
-
-          <button className="primaryButton">
-            Enter Archive
+        <div className="heroCopy fadeIn">
+          <p className="eyebrow">{hero.eyebrow}</p>
+          <h1>{hero.title}</h1>
+          <p className="heroDescription">{hero.description}</p>
+          <a className="primaryButton" href="#objects">
+            {hero.buttonText}
             <ArrowRight size={18} />
-          </button>
-        </motion.div>
-      </section>
+          </a>
+        </div>
 
-      <section className="todayMood">
-        <div className="moodCard">
-          <span className="label">TODAY'S MOOD</span>
-          <h2>2:13 AM / Light Rain / Slowdive</h2>
-          <p>
-            Tonight feels soft, distant and slightly transparent.
-          </p>
+        <div className="heroPanel fadeIn delayOne">
+          <div className="orb orbOne" />
+          <div className="orb orbTwo" />
+          <div className="panelContent">
+            <span>CURATION MODE</span>
+            <strong>Emotion first, product second.</strong>
+            <p>用情緒、時間、音樂與故事去整理你的品味選物。</p>
+          </div>
         </div>
       </section>
 
-      <section className="objectsGrid">
-        {objects.map((item, index) => (
-          <motion.div
-            className="objectCard"
-            key={index}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.15 }}
-            viewport={{ once: true }}
-          >
-            <span className="objectCategory">{item.category}</span>
+      <section id="mood" className="moodSection">
+        <div className="sectionLabel">
+          <span>01</span>
+          <span>TODAY'S MOOD</span>
+        </div>
 
-            <h3>{item.title}</h3>
+        <article className="moodCard">
+          <div>
+            <p className="muted">現在的情緒</p>
+            <h2>{mood.title}</h2>
+            <p>{mood.description}</p>
+          </div>
 
-            <p>{item.description}</p>
+          <div className="moodMeta">
+            <span>{mood.timeLabel}</span>
+            <span>{mood.musicLabel}</span>
+          </div>
+        </article>
+      </section>
 
-            <div className="objectFooter">
-              <span>OBJECT_0{index + 1}</span>
-              <ArrowRight size={16} />
-            </div>
-          </motion.div>
-        ))}
+      <section id="objects" className="objectsSection">
+        <div className="sectionLabel">
+          <span>02</span>
+          <span>OBJECT ARCHIVE</span>
+        </div>
+
+        <div className="objectsGrid">
+          {objects.map((item, index) => {
+            const image = imageUrl(item.image)?.width(900).height(700).fit("crop").url();
+
+            return (
+              <Link
+                href={`/objects/${item.slug}`}
+                className="objectCard"
+                key={item._id || item.slug || index}
+              >
+                <div
+                  className={`objectImage ${image ? "hasImage" : ""}`}
+                  style={image ? { backgroundImage: `url(${image})` } : undefined}
+                >
+                  {!image && <span>OBJECT_{String(index + 1).padStart(2, "0")}</span>}
+                </div>
+
+                <div className="objectBody">
+                  <div className="objectMeta">
+                    <span>{item.category || "Uncategorized"}</span>
+                    <span>{item.emotion || "Quiet"}</span>
+                  </div>
+
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+
+                  <div className="objectFooter">
+                    <span>{item.price || "ARCHIVE ONLY"}</span>
+                    <ArrowRight size={16} />
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
       </section>
     </main>
   );

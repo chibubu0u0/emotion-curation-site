@@ -1,5 +1,5 @@
 {
-  "name": "emotion-curation-site",
+  "name": "emotion-curation-sanity-cms",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -8,10 +8,15 @@
     "start": "next start"
   },
   "dependencies": {
-    "framer-motion": "^12.10.5",
-    "lucide-react": "^0.511.0",
-    "next": "latest",
-    "react": "latest",
-    "react-dom": "latest"
+    "@sanity/client": "latest",
+    "@sanity/image-url": "latest",
+    "framer-motion": "latest",
+    "lucide-react": "latest",
+    "next": "16.2.6",
+    "next-sanity": "latest",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "sanity": "latest",
+    "styled-components": "latest"
   }
 }
