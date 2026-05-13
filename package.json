@@ -8,10 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "framer-motion": "^12.10.5",
+    "lucide-react": "^0.511.0",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest",
-    "framer-motion": "^12.10.5",
-    "lucide-react": "^0.511.0"
+    "react-dom": "latest"
+}
   }
 }
